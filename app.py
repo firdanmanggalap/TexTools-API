@@ -1,5 +1,4 @@
 from fastapi import FastAPI, Request
-from mangum import Mangum
 from lexicalrichness import LexicalRichness
 import textstat
 import json
@@ -39,6 +38,3 @@ async def analyze(request: Request):
 
     except Exception as e:
         return {"error": str(e)}
-
-# Adapter buat serverless (Vercel)
-handler = Mangum(app)
