@@ -34,7 +34,7 @@ async def analyze(request: Request):
             "ttr": lex.ttr,
             "rttr": lex.rttr,
             "cttr": lex.cttr,
-            "mtld": lex.mtld,
+            "mtld": lex.mtld(),
             "msttr": lex.msttr(segment_window=msttr_window),
             "mattr": lex.mattr(window_size=mattr_window),
             "hdd": lex.hdd(draws=42),
