@@ -23,25 +23,26 @@ async def analyze(request: Request):
 
         msttr_window = int(data.get("msttr_window", 50))
         mattr_window = int(data.get("mattr_window", 50))
+        hdd_draws = int(data.get("hdd_draws", 42))
 
         if not text:
             return {"error": "Empty text"}
 
         lex = LexicalRichness(text)
         response = {
-            "words": lex.words,
-            "types": lex.terms,
-            "ttr": lex.ttr,
-            "rttr": lex.rttr,
-            "cttr": lex.cttr,
-            "mtld": lex.mtld(),
-            "msttr": lex.msttr(segment_window=msttr_window),
-            "mattr": lex.mattr(window_size=mattr_window),
-            "hdd": lex.hdd(draws=42),
-            "flesch_reading_ease": textstat.flesch_reading_ease(text),
-            "flesch_kincaid_grade": textstat.flesch_kincaid_grade(text),
-            "gunning_fog": textstat.gunning_fog(text),
-            "smog_index": textstat.smog_index(text),
+            "words": int(lex.words),
+            "types": int(lex.terms),
+            "ttr": round(float(lex.ttr), 5),
+            "rttr": round(float(lex.rttr), 5),
+            "cttr": round(float(lex.cttr), 5),
+            "mtld": round(float(lex.mtld()), 5),
+            "msttr": round(float(lex.msttr(segment_window=msttr_window)), 5),
+            "mattr": round(float(lex.mattr(window_size=mattr_window)), 5),
+            "hdd": round(float(lex.hdd(draws=hdd_draws)), 5),
+            "flesch_reading_ease": round(float(textstat.flesch_reading_ease(text)), 5),
+            "flesch_kincaid_grade": round(float(textstat.flesch_kincaid_grade(text)), 5),
+            "gunning_fog": round(float(textstat.gunning_fog(text)), 5),
+            "smog_index": round(float(textstat.smog_index(text)), 5),
         }
         return response
 
