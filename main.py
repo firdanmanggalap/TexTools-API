@@ -1,9 +1,18 @@
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from lexicalrichness import LexicalRichness
 import textstat
 import json
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Atau masukkan domain web lu
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/api/analyze")
 async def analyze(request: Request):
