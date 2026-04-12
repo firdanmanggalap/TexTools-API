@@ -28,7 +28,7 @@ async def analyze(request: Request):
             return {"error": "Empty text"}
 
         # 🔹 Sentence detection (regex)
-        sentences = re.split(r'[.!?]+', text)
+        sentences = re.split(r'[.!?\n\-]+', text)
         sentences = [s.strip() for s in sentences if s.strip()]
         sentence_count = len(sentences)
 
